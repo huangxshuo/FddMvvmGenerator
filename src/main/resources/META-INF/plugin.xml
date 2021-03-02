@@ -1,0 +1,69 @@
+<idea-plugin>
+    <id>com.fdd.FddMvvmGenerator</id>
+    <name>FddMvvmGenerator</name>
+    <vendor email="huangxiushuo@fangdd.com" url="http://www.fangdd.com">房多多</vendor>
+
+    <description><![CDATA[
+    <h1>FddMvvmGenerator</h1>
+      <br/>
+      <p>
+      <b>
+      <a href="http://www.fangdd.com">Website</a> |
+      </b>
+      </p>
+      <br/>
+      <p><b>An plugin that automatically generates an Mvvm template code.</b></p>
+      <br/>
+      <p><b>Features:</b>
+      <ul>
+        <li>Supports Java and Kotlin.</li>
+      </ul>
+      </p>
+      <br/>
+      <p><a href="https://github.com/huangxshuo/FddMvvmGenerator/issues">Send feedback</a></p>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <idea-version since-build="192"/>
+    <!--<idea-version since-build="173.3727" until-build="182.*"/>-->
+    <depends>org.jetbrains.kotlin</depends>
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <!--<depends>com.intellij.modules.java</depends>-->
+    <depends>org.jetbrains.android</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group description="auto make mvvm code" id="mvvmMaker" text="Generate Fdd Mvvm Code">
+            <add-to-group anchor="first" group-id="NewGroup"/>
+            <action class="com.fdd.mvvmgenerator.action.CreateFileFromTemplateAction"
+                    description="auto make mvvm code"
+                    id="mvvmMaker.make"
+                    text="Generate Fdd Mvvm Code"/>
+        </group>
+
+
+        <group description="auto make mvvm code" id="mvvmRetrofitMaker" text="Generate Fdd Http Code">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+            <action class="com.fdd.mvvmgenerator.action.CreateRetrofitMethodAction"
+                    id="mvvmRetrofitMaker.make"
+                    text="Generate Fdd Retrofit Code"
+                    description="Generate Retrofit Service method in Model class And ViewModel class">
+            </action>
+        </group>
+
+        <group description="auto make mvvm code" id="mvvmItemAdapterMaker" text="Generate Fdd Item Adapter">
+            <add-to-group group-id="GenerateGroup" anchor="before" relative-to-action="mvvmRetrofitMaker.make"/>
+            <action class="com.fdd.mvvmgenerator.action.CreateItemAdapterAction"
+                    id="mvvmItemAdapterMaker.make"
+                    text="Generate Item Adapter"
+                    description="Generate Item Adapter">
+            </action>
+        </group>
+    </actions>
+</idea-plugin>
